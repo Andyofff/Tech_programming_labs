@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkPay - Система начисления зарплаты</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Заголовок -->
+    <header>
+        <h1>WorkPay</h1>
+        <p>Система начисления зарплаты</p>
+    </header>
+
+    <!-- Навигация -->
+    <nav>
+        <ul>
+            <li class="dropdown">
+                <a href="#" data-target="login">Войти в систему</a>
+                <ul class="dropdown-content">
+                    <li><a href="#" data-target="login-employee">Служащий</a></li>
+                    <li><a href="#" data-target="login-admin">Администратор</a></li>
+                    <li><a href="#" data-target="login-accountant">Бухгалтер</a></li>
+                </ul>
+            </li>
+            <li><a href="#" data-target="manage-info">Управление информацией</a></li>
+            <li><a href="#" data-target="search-view">Поиск/просмотр информации</a></li>
+            <li><a href="#" data-target="help">Help</a></li>
+        </ul>
+    </nav>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Форма авторизации -->
+        <section id="login" class="hidden">
+            <h2>Войти в систему</h2>
+            <p>Выберите вашу роль из выпадающего меню.</p>
+        </section>
+
+        <!-- Управление информацией -->
+        <section id="manage-info" class="hidden">
+            <h2>Управление информацией</h2>
+            <p>Здесь вы можете:</p>
+            <ul>
+                <li>Добавить новую информацию (нажмите <button>Добавить</button>).</li>
+                <li>Редактировать существующую информацию (выберите элемент и нажмите <button>Редактировать</button>).</li>
+                <li>Удалить элемент из списка (выберите элемент и нажмите <button>Удалить</button>).</li>
+            </ul>
+            <button>Загрузить ещё</button>
+            <p><small>Button adds more items to the list above.</small></p>
+        </section>
+
+        <!-- Поиск и просмотр -->
+        <section id="search-view" class="hidden">
+            <h2>Поиск/просмотр информации</h2>
+            <p>Введите запрос в поле ниже для поиска:</p>
+            <input type="text" placeholder="Введите запрос...">
+            <button>Искать</button>
+            <button>Сортировать</button>
+            <button>Фильтровать</button>
+            <p><small>Buttons allow you to sort or filter the results.</small></p>
+        </section>
+
+        <!-- Помощь -->
+        <section id="help" class="hidden">
+            <h2>Help</h2>
+            <p>Возникли вопросы? Свяжитесь с поддержкой через <a href="#">эту ссылку</a>.</p>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2024 WorkPay. Все права защищены.</p>
+    </footer>
+
+    <!-- Логика переключения разделов -->
+    <script>
+        const links = document.querySelectorAll('a[data-target]');
+        const sections = document.querySelectorAll('main section');
+
+        links.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const target = link.getAttribute('data-target');
+                
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                const activeSection = document.getElementById(target);
+                if (activeSection) {
+                    activeSection.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
