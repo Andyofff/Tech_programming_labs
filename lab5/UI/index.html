@@ -48,7 +48,19 @@
       <form id="dynamicForm"></form>
     </section>
   </main>
-
+  
+<!-- Кнопка Поддержка -->
+  <a href="#supportModal" class="support-btn" title="Поддержка">?</a>
+  
+  <!-- Модальное окно -->
+  <div id="supportModal" class="modal">
+    <div class="modal-content">
+      <a href="#" class="close" title="Закрыть">&times;</a>
+      <h2>Help</h2>
+      <p><a href="mailto:support@workpay.ru" class="support-link">Написать в поддержку</a></p>
+    </div>
+  </div>
+  
   <footer>
     <p>© 2024 WorkPay. Все права защищены.</p>
   </footer>
@@ -118,6 +130,12 @@
             name: "Управление сотрудниками",
             icon: "fas fa-users-cog",
             form: `
+			
+			 <div class="admin-controls">
+			<button class="sort-btn">Сортировать</button>
+			<button class="filter-btn">Фильтровать</button>
+			</div>
+			
               <label for="employeeAction">Действие:</label>
               <select id="employeeAction" name="employeeAction">
                 <option value="add">Добавить сотрудника</option>
@@ -252,5 +270,6 @@ document.getElementById("logoutButton").addEventListener("click", () => {
       }
     });
   </script>
+  
 </body>
 </html>
