@@ -1,99 +1,256 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkPay - Система начисления зарплаты</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkPay - Система начисления зарплаты</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Заголовок -->
-    <header>
-        <h1>WorkPay</h1>
-        <p>Система начисления зарплаты</p>
-    </header>
+  <header>
+    <h1>WorkPay</h1>
+    <p>Система начисления зарплаты</p>
+  </header>
 
-    <!-- Навигация -->
-    <nav>
-        <ul>
-            <li class="dropdown">
-                <a href="#" data-target="login">Войти в систему</a>
-                <ul class="dropdown-content">
-                    <li><a href="#" data-target="login-employee">Служащий</a></li>
-                    <li><a href="#" data-target="login-admin">Администратор</a></li>
-                    <li><a href="#" data-target="login-accountant">Бухгалтер</a></li>
-                </ul>
-            </li>
-            <li><a href="#" data-target="manage-info">Управление информацией</a></li>
-            <li><a href="#" data-target="search-view">Поиск/просмотр информации</a></li>
-            <li><a href="#" data-target="help">Help</a></li>
-        </ul>
-    </nav>
+  <!-- Вход в систему -->
+  <section id="loginSection">
+    <h2>Вход в систему</h2>
+    <form id="loginForm">
+      <label for="username">Логин:</label>
+      <input type="text" id="username" name="username" placeholder="Введите логин" required>
+      
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+      
+      <label for="actorSelect">Выберите роль:</label>
+      <select id="actorSelect" name="actor" required>
+        <option value="employee">Служащий</option>
+        <option value="admin">Администратор</option>
+        <option value="accountant">Бухгалтер</option>
+      </select>
+      
+      <button type="button" id="loginButton">Войти</button>
+    </form>
+  </section>
 
-    <!-- Основной контент -->
-    <main>
-        <!-- Форма авторизации -->
-        <section id="login" class="hidden">
-            <h2>Войти в систему</h2>
-            <p>Выберите вашу роль из выпадающего меню.</p>
-        </section>
+  <!-- Меню действий для акторов -->
+  <main id="mainContent" class="hidden">
+  
+  <button id="logoutButton" class="hidden">Выйти</button>
 
-        <!-- Управление информацией -->
-        <section id="manage-info" class="hidden">
-            <h2>Управление информацией</h2>
-            <p>Здесь вы можете:</p>
-            <ul>
-                <li>Добавить новую информацию (нажмите <button>Добавить</button>).</li>
-                <li>Редактировать существующую информацию (выберите элемент и нажмите <button>Редактировать</button>).</li>
-                <li>Удалить элемент из списка (выберите элемент и нажмите <button>Удалить</button>).</li>
-            </ul>
-            <button>Загрузить ещё</button>
-            <p><small>Button adds more items to the list above.</small></p>
-        </section>
+    <section id="useCases">
+      <h2 id="useCaseTitle"></h2>
+      <ul id="useCaseList"></ul>
+    </section>
+    <section id="formSection" class="hidden">
+      <h2 id="formTitle"></h2>
+      <form id="dynamicForm"></form>
+    </section>
+  </main>
 
-        <!-- Поиск и просмотр -->
-        <section id="search-view" class="hidden">
-            <h2>Поиск/просмотр информации</h2>
-            <p>Введите запрос в поле ниже для поиска:</p>
-            <input type="text" placeholder="Введите запрос...">
-            <button>Искать</button>
-            <button>Сортировать</button>
-            <button>Фильтровать</button>
-            <p><small>Buttons allow you to sort or filter the results.</small></p>
-        </section>
+  <footer>
+    <p>© 2024 WorkPay. Все права защищены.</p>
+  </footer>
 
-        <!-- Помощь -->
-        <section id="help" class="hidden">
-            <h2>Help</h2>
-            <p>Возникли вопросы? Свяжитесь с поддержкой через <a href="#">эту ссылку</a>.</p>
-        </section>
-    </main>
+  <script>
+    // Данные для Use Case-ов
+    const actors = {
+      employee: {
+        title: "Действия для Служащего",
+        useCases: [
+          {
+            name: "Выбор способа начисления ЗП",
+            icon: "fas fa-money-bill",
+            form: `
+              <label for="paymentMethod">Выберите способ:</label>
+              <select id="paymentMethod" name="paymentMethod">
+                <option value="bank">На банковскую карту</option>
+                <option value="cash">Наличные</option>
+              </select>
+              <button type="submit">Сохранить выбор</button>
+            `
+          },
+          {
+            name: "Ввод рабочего времени",
+            icon: "fas fa-clock",
+            form: `
+              <label for="workDate">Дата:</label>
+              <input type="date" id="workDate" name="workDate" required>
+              
+              <label for="hoursWorked">Количество часов:</label>
+              <input type="number" id="hoursWorked" name="hoursWorked" min="1" max="24" required>
+              
+              <button type="submit">Добавить данные</button>
+            `
+          },
+          {
+            name: "Запрос отчётов",
+            icon: "fas fa-file-alt",
+            form: `
+              <label for="reportType">Тип отчёта:</label>
+              <select id="reportType" name="reportType">
+                <option value="monthly">Месячный</option>
+                <option value="annual">Годовой</option>
+              </select>
+              <button type="submit">Запросить</button>
+            `
+          },
+          {
+            name: "Изменение личных данных",
+            icon: "fas fa-user-edit",
+            form: `
+              <label for="email">Новый Email:</label>
+              <input type="email" id="email" name="email" required>
+              
+              <label for="phone">Новый номер телефона:</label>
+              <input type="tel" id="phone" name="phone" required>
+              
+              <button type="submit">Сохранить изменения</button>
+            `
+          },
+        ]
+      },
+      admin: {
+        title: "Возможности Администратора",
+        useCases: [
+          {
+            name: "Управление сотрудниками",
+            icon: "fas fa-users-cog",
+            form: `
+              <label for="employeeAction">Действие:</label>
+              <select id="employeeAction" name="employeeAction">
+                <option value="add">Добавить сотрудника</option>
+                <option value="edit">Редактировать сотрудника</option>
+                <option value="remove">Удалить сотрудника</option>
+              </select>
+              
+              <div id="employeeDetails">
+              <label for="employeeName">Имя:</label>
+              <input type="text" id="employeeName" name="employeeName" required>
+              
+              <label for="employeePosition">Должность:</label>
+              <input type="text" id="employeePosition" name="employeePosition" required>
+              </div>
+              
+              <button type="submit">Выполнить</button>
+            `
+          },
+          {
+            name: "Формирование отчётов для руководства",
+            icon: "fas fa-chart-line",
+            form: `
+              <label for="reportFormat">Формат отчёта:</label>
+              <select id="reportFormat" name="reportFormat">
+                <option value="pdf">PDF</option>
+                <option value="excel">Excel</option>
+              </select>
+              <button type="submit">Создать отчёт</button>
+            `
+          }
+        ]
+      },
+      accountant: {
+        title: "Функции Бухгалтера",
+        useCases: [
+          {
+            name: "Подсчёт зарплаты для сотрудника",
+            icon: "fas fa-calculator",
+            form: `
+              <label for="employeeId">ID сотрудника:</label>
+              <input type="text" id="employeeId" name="employeeId" required>
+              
+              <button type="submit">Рассчитать зарплату</button>
+            `
+          },
+          {
+            name: "Отправление запроса в банк",
+            icon: "fas fa-university",
+            form: `
+              <label for="bankAccount">Счёт для перевода:</label>
+              <input type="text" id="bankAccount" name="bankAccount" required>
+              
+              <button type="submit">Отправить запрос</button>
+            `
+          }
+        ]
+      }
+    };
 
-    <!-- Подвал -->
-    <footer>
-        <p>&copy; 2024 WorkPay. Все права защищены.</p>
-    </footer>
+document.getElementById("logoutButton").addEventListener("click", () => {
+  // Скрываем основной контент и формы
+  document.getElementById("mainContent").classList.add("hidden");
+  document.getElementById("formSection").classList.add("hidden");
+  document.getElementById("useCaseList").innerHTML = "";
 
-    <!-- Логика переключения разделов -->
-    <script>
-        const links = document.querySelectorAll('a[data-target]');
-        const sections = document.querySelectorAll('main section');
+  // Показываем секцию входа
+  document.getElementById("loginSection").classList.remove("hidden");
 
-        links.forEach(link => {
-            link.addEventListener('click', event => {
-                event.preventDefault();
-                const target = link.getAttribute('data-target');
-                
-                sections.forEach(section => {
-                    section.classList.add('hidden');
-                });
+  // Очистка введённых данных
+  document.getElementById("loginForm").reset();
+});
 
-                const activeSection = document.getElementById(target);
-                if (activeSection) {
-                    activeSection.classList.remove('hidden');
-                }
-            });
+
+    // Функционал для входа и отображения Use Case-ов
+    document.getElementById("loginButton").addEventListener("click", () => {
+      const role = document.getElementById("actorSelect").value;
+      const actor = actors[role];
+      const useCaseList = document.getElementById("useCaseList");
+      const useCaseTitle = document.getElementById("useCaseTitle");
+
+      useCaseTitle.textContent = actor.title;
+      useCaseList.innerHTML = actor.useCases.map(
+        (useCase, index) => `
+          <li data-index="${index}" data-role="${role}">
+            <i class="${useCase.icon}"></i> ${useCase.name}
+          </li>
+        `
+      ).join("");
+
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById("mainContent").classList.remove("hidden");
+    });
+
+    document.getElementById("useCaseList").addEventListener("click", (e) => {
+      const listItem = e.target.closest("li");
+      if (!listItem) return;
+
+      const { index, role } = listItem.dataset;
+      const useCase = actors[role].useCases[index];
+
+      document.getElementById("formTitle").textContent = useCase.name;
+      document.getElementById("dynamicForm").innerHTML = useCase.form;
+      document.getElementById("formSection").classList.remove("hidden");
+	  
+	        if (role === "admin" && index == 0) {
+        document.getElementById("employeeAction").addEventListener("change", function () {
+          const action = this.value;
+          const details = document.getElementById("employeeDetails");
+          if (action === "add") {
+            details.innerHTML = `
+              <label for="employeeName">Имя:</label>
+              <input type="text" id="employeeName" name="employeeName" required>
+              
+              <label for="employeePosition">Должность:</label>
+              <input type="text" id="employeePosition" name="employeePosition" required>
+            `;
+          } else if (action === "edit") {
+            details.innerHTML = `
+              <label for="employeeId">ID сотрудника:</label>
+              <input type="text" id="employeeId" name="employeeId" required>
+              
+              <label for="newPosition">Новая должность:</label>
+              <input type="text" id="newPosition" name="newPosition">
+            `;
+          } else if (action === "remove") {
+            details.innerHTML = `
+              <label for="employeeId">ID сотрудника:</label>
+              <input type="text" id="employeeId" name="employeeId" required>
+            `;
+          }
         });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>

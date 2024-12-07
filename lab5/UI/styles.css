@@ -1,119 +1,223 @@
 /* Общие стили */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #f0f4ff, #cce5ff);
-    color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Для полной высоты страницы */
 }
 
-/* Заголовок */
 header {
-    background-color: #4caf50;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #6a1b9a;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5rem;
+  margin: 0;
+  font-size: 2.5em;
 }
 
 header p {
-    margin: 5px 0 0;
-    font-size: 1.2rem;
+  margin: 5px 0 0;
+  font-size: 1.2em;
 }
 
-/* Навигация */
-nav {
-    background-color: #333;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+footer {
+  background-color: #6a1b9a;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: auto; /* Чтобы футер оставался внизу */
+  width: 100%;
 }
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+/* Раздел входа */
+#loginSection {
+  margin: 50px auto;
+  width: 90% !important;
+  max-width: 600px !important;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-nav ul li {
-    position: relative;
+#loginSection h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6a1b9a;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    padding: 10px 20px;
-    display: block;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+#loginForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-nav ul li a:hover {
-    background-color: #575757;
+#loginForm input,
+#loginForm select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-/* Выпадающее меню */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border-radius: 5px;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+#loginForm button {
+  width: 100%;
+  padding: 10px;
+  background-color: #6a1b9a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
 }
 
-.dropdown-content li a {
-    color: #333;
-    padding: 10px 15px;
-    text-align: left;
-    transition: background 0.3s ease;
+#loginForm button:hover {
+  background-color: #5c1381;
 }
 
-.dropdown-content li a:hover {
-    background-color: #f1f1f1;
+/* Кнопка "Выйти" */
+#logoutButton {
+  margin: 20px auto;
+  display: block;
+  width: 150px;
+  padding: 10px;
+  background-color: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  text-align: center;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Основной контент */
-main {
-    padding: 30px;
-    text-align: center;
-}
-
-main section {
-    background: white;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+#logoutButton:hover {
+  background-color: #b71c1c;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
-/* Подвал */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+/* Главный контент */
+#mainContent {
+  padding: 20px;
+  flex: 1; /* Контент растягивается на всю оставшуюся высоту */
+}
+
+#mainContent.hidden {
+  display: none;
+}
+
+#useCases h2 {
+  color: #6a1b9a;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#useCaseList {
+  list-style: none;
+  padding: 0;
+}
+
+#useCaseList li {
+  background: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#useCaseList li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+#useCaseList li i {
+  font-size: 1.5em;
+  margin-right: 10px;
+  color: #6a1b9a;
+}
+
+#useCaseList li.selected {
+  background-color: #e1bee7;
+  border: 2px solid #6a1b9a;
+}
+
+#formSection {
+  margin-top: 20px;
+}
+
+#formSection.hidden {
+  display: none;
+}
+
+#formSection h2 {
+  color: #6a1b9a;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#dynamicForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#dynamicForm input,
+#dynamicForm select,
+#dynamicForm button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#dynamicForm button {
+  background-color: #6a1b9a;
+  color: #fff;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#dynamicForm button:hover {
+  background-color: #5c1381;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+
+  #loginSection {
+    width: 90%;
+  }
+
+  #useCaseList li {
+    font-size: 0.9em;
+  }
+
+  #dynamicForm input,
+  #dynamicForm select,
+  #dynamicForm button {
+    font-size: 0.9em;
+  }
 }
