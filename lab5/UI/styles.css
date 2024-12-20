@@ -311,6 +311,8 @@ footer {
   text-decoration: underline;
 }
 
+/* Стили для кнопок сортировать, фильтровать */
+
 .admin-controls {
   display: flex;
   gap: 10px; /* Расстояние между кнопками */
